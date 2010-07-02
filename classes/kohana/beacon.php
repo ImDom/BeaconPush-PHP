@@ -10,24 +10,22 @@ class Kohana_Beacon {
         return new Kohana_Beacon();
     }
 
-    protected function send_request($method, $command, $arg=NULL, $content=array())
+    protected function send_request($method, $command, $arg=NULL, array $data=array())
     {
         $request_url = 'http://'.Kohana::config('beacon.api_host').'/'.Kohana::config('beacon.api_version').'/'.Kohana::config('beacon.api_key');
         $request_url = $request_url.'/'.strtolower($command).($arg ? '/'.$arg : '');
 
-        $headers[] = 'X-Beacon-Secret-Key: '.Kohana::config('beacon.secret_key')."\r\n";
-        $headers[] = 'content: '.json_encode($content);
+        $options = array(
+            'http' => array(
+                'method' => $method,
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n".
+                            "X-Beacon-Secret-Key: ".Kohana::config('beacon.secret_key')."\r\n",
+                'content' => json_encode($data),
+            ),
+        );
 
-
-        $ch = curl_init($request_url);
-        
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-
-        $response = curl_exec($ch);
-        curl_close($ch);
-
+        $context = stream_context_create($options);
+        $response = @file_get_contents($request_url, FALSE, $context);
         return json_decode($response);
     }
 
@@ -46,22 +44,22 @@ class Kohana_Beacon {
     public function user_online($user)
     {
         $response = $this->send_request('GET', 'users', $user);
-        return $response->{'status'} == '200' ? TRUE : FALSE;
+        return isset($response->{'online'}) ? TRUE : FALSE;
     }
 
     public function send_message_to_user($user, $msg)
     {
         $response = $this->send_request('POST', 'users', $user, array('message' => $msg));
-        return $response;
+        return isset($response->{'messages_sent'}) ? TRUE : FALSE;
     }
 
     public function send_message_to_channel($channel, $msg)
     {
         $response = $this->send_request('POST', 'channels', $channel, array('message' => $msg));
-        return $response;
+        return isset($response->{'messages_sent'}) ? $response->{'messages_sent'} : FALSE;
     }
 
-    public function user_force_logout($user)
+    public function force_user_logout($user)
     {
         $this->send_request('DELETE', 'users', $user);
         return TRUE;
