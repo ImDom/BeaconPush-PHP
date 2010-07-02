@@ -1,1 +1,14 @@
-http://beaconpush.com/
+How to install:
+
+
+Move the the content to a folder named "beacon" in the modules folder.
+
+Create an account at http://www.beaconpush.com if you don't already 
+have one and find your API key and Secret key (go to your account page).
+
+Apply you API key and Secret key inside the module config file (the 
+only file inside the configs folder)
+
+Enable the module in your bootstrap.php file.
+
+Have fun with real-time features!
