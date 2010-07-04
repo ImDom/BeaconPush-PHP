@@ -14,4 +14,5 @@ Enable the module in your bootstrap.php file.
 Have fun with real-time features!
 
 Documentation can be found if you enable the userguide module that comes 
-with Kohana.
+with Kohana or look at the comments in the source code :-)
+http://github.com/ImDom/Kohana-Beacon/blob/master/classes/kohana/beacon.php
