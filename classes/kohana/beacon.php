@@ -22,7 +22,7 @@ class Kohana_Beacon {
     public static function instance()
     {
         if(Beacon::$_instance === NULL)
-            Beacon::$_instance = new self;
+            Beacon::$_instance = new Beacon;
 
         return Beacon::$_instance;
     }
