@@ -1,12 +1,2 @@
-
-/.svn/all-wcprops
-/.svn/entries
-/classes/.svn/all-wcprops
-/classes/.svn/entries
-/classes/.svn/text-base/beacon.php.svn-base
-/classes/kohana/.svn/all-wcprops
-/classes/kohana/.svn/entries
-/classes/kohana/.svn/text-base/beacon.php.svn-base
-/config/.svn/all-wcprops
-/config/.svn/entries
-/config/.svn/text-base/beacon.php.svn-base
+.svn/
+*/.svn/
