@@ -36,7 +36,7 @@ class Kohana_Beacon {
     /**
      * Get an array of users online in a channel
      *
-     *      Beacon::get_get_users_in_channel($channel);
+     *      $users = Beacon::get_get_users_in_channel($channel);
      *
      * @param string  $channel   The channel to get online users from
      * @return array             Users online in the channel defined
