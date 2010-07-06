@@ -66,11 +66,11 @@ class Kohana_Beacon {
     /**
      * Get the total amount of users online in all channels
      *
-     *      $users_online = Beacon::get_total_users_online();
+     *      $users_online = Beacon::get_users_online();
      *
      * @return int  Total number of users online
      */
-    public static function get_total_users_online()
+    public static function get_users_online()
     {
         $response = Beacon::_request('GET', 'users');
         return $response->{'online'};
