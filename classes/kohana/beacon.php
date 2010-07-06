@@ -5,6 +5,7 @@
  * @author    Dominik Rask
  * @copyright (c) 2010 Dominik Rask
  * @license   MIT
+ * @dependencies cURL
  */
 class Kohana_Beacon {
 
@@ -14,22 +15,37 @@ class Kohana_Beacon {
     /**
      * Send the request
      */
-    protected static function _request($method, $command, $arg=NULL, array $data=array())
+    protected static function _request($method, $command, $arg=NULL, array $data=array(), $curl_timeout=30)
     {
         $request_url = 'http://'.Kohana::config('beacon.api_host').'/'.Kohana::config('beacon.api_version').'/'.Kohana::config('beacon.api_key');
         $request_url = $request_url.'/'.strtolower($command).($arg ? '/'.$arg : '');
 
-        $options = array(
-            'http' => array(
-                'method' => $method,
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n".
-                            "X-Beacon-Secret-Key: ".Kohana::config('beacon.secret_key')."\r\n",
-                'content' => json_encode($data),
-            ),
+        $headers = array(
+            'X-Beacon-Secret-Key: '. Kohana::config('beacon.secret_key'),
         );
 
-        $context = stream_context_create($options);
-        $response = @file_get_contents($request_url, FALSE, $context);
+        $ch = curl_init($request_url);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+        curl_setopt($ch, CURLOPT_TIMEOUT, $curl_timeout);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+
+        if($method == 'GET')
+            curl_setopt($ch, CURLOPT_HTTPGET, TRUE);
+        elseif($method == 'DELETE')
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+        else //$method == 'POST'
+        {
+            curl_setopt($ch, CURLOPT_POST, TRUE);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        }
+
+        if(($response = curl_exec($ch)) === FALSE)
+            throw new Exception('cURL failed: '.curl_error($ch));
+
+        curl_close($ch);
         return json_decode($response);
     }
 
