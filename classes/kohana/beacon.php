@@ -30,7 +30,6 @@ class Kohana_Beacon {
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
         curl_setopt($ch, CURLOPT_TIMEOUT, $curl_timeout);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
 
         if($method == 'GET')
             curl_setopt($ch, CURLOPT_HTTPGET, TRUE);
