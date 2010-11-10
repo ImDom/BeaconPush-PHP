@@ -19,7 +19,7 @@ Simply include the file beaconpush in your site and it should be pretty straight
 	// Send an event (+data) to all users in the channel "theBestChannel"
 	$beaconpush >send_to_channel('theBestChannel', 'newMessage', array('message' => 'Hello world!'));
 
-and in your "base" html file, include following before your closing body (</body>) tag
+and in your "base" html file, include following before your closing body tag
 
 	<?php print $beaconpush >embed(); ?>
 
