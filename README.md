@@ -38,7 +38,7 @@ and after that, it should look something like this
 		</body>
 	</html>
 
-And that's pretty much it you need to get started to use Beaconpush with PHP!
+And that's pretty much all you need to get started with BeaconPush-PHP!
 
 
 Documentation
