@@ -56,6 +56,7 @@ string **embed** ( [ array *$options* = *array()* ] )
 
 #### Example #1:
 
+	$beaconpush->add_channel('theBestChannel');
 	$beaconpush->embed(array('log' => TRUE, 'user' => 'myCustomIdForUser'));
 
 #### Example #1 returns:
@@ -68,6 +69,7 @@ string **embed** ( [ array *$options* = *array()* ] )
 
 #### Example #2:
 
+	$beaconpush->add_channel('theBestChannel');
 	$beaconpush->embed();
 
 #### Example #2 returns:
