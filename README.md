@@ -43,7 +43,7 @@ That's pretty much all you need to get started with BeaconPush-PHP!
 
 Documentation
 =============
-**I'll add better "example returns" later. For the moment, use print_r() to see exactly the results you get back.**
+*I'll add better "example returns" later. For the moment, use print_r() to see exactly the results you get back.*
 
 embed
 -----
