@@ -8,7 +8,7 @@ Apply you API key and Secret key on row 6 and 7 in classes/beaconpush.php
 
 How to use it
 =============
-Simply include the file beaconpush in your site and it should be pretty straight forward from there.
+Simply include the file beaconpush.php in your site and it should be pretty straight forward from there.
 
 	require('classes/beaconpush.php');
 	$beaconpush = new BeaconPush();
@@ -19,7 +19,7 @@ Simply include the file beaconpush in your site and it should be pretty straight
 	// Send an event (+data) to all users in the channel "theBestChannel"
 	$beaconpush >send_to_channel('theBestChannel', 'newMessage', array('message' => 'Hello world!'));
 
-and in your "base" html file, include following before your closing body tag
+In your html file, include the following line before your closing body tag
 
 	<?php print $beaconpush >embed(); ?>
 
@@ -38,7 +38,7 @@ and after that, it should look something like this
 		</body>
 	</html>
 
-And that's pretty much all you need to get started with BeaconPush-PHP!
+That's pretty much all you need to get started with BeaconPush-PHP!
 
 
 Documentation
