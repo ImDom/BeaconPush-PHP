@@ -31,3 +31,4 @@ jQuery.extend({
 *     console.log('The message: ' + event.data.myMessage);
 *     console.log('The event: ' + event.name);
 * });
+*/
