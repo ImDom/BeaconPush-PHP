@@ -3,7 +3,7 @@ How to get started
 Create an account at http://www.beaconpush.com if you don't already have 
 one and find your API key and Secret key (go to your account page).
 
-Apply you API key and Secret key on row 6 and 7 in classes/beaconpush.php
+Put your API key and Secret key on row 6 and 7 in classes/beaconpush.php
 
 
 How to use it
