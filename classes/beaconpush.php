@@ -56,28 +56,8 @@ class BeaconPush {
     {
         $r = "<script type=\"text/javascript\" src=\"http://beaconpush.com/1/client.js\"></script>\n";
 
-        $beacon_options = "";
-
-        if($options)
-        {
-            $beacon_options .= ",{";
-
-            if(array_key_exists('log', $options))
-            {
-                $comma = (array_key_exists('user', $options) ? "," : "");
-                $log = ($options['log'] ? ($options['log'] !== "false" ? "true" : "false") : "false");
-                $beacon_options .= "log:".$log.$comma;
-            }
-
-            if(array_key_exists('user', $options))
-                $beacon_options .= "user:'".$options['user']."'";
-
-
-            $beacon_options .= "}";
-        }
-
         $r .= "<script type=\"text/javascript\">";
-        $r .= "Beacon.connect(\"".BeaconPush::$api_key."\",[\"".implode('","', BeaconPush::$channels)."\"]".$beacon_options.");";
+        $r .= "Beacon.connect(\"".BeaconPush::$api_key."\",[\"".implode('","', BeaconPush::$channels)."\"],".json_encode($options).");";
         $r .= "</script>";
 
         return $r;
